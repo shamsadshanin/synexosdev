@@ -1,0 +1,6 @@
+{
+  "name": "GridWise LLM Energy Optimizer",
+  "description": "An AI-powered energy management system that interprets operator directives and optimizes 24-hour grid electricity usage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
