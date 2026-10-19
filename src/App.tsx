@@ -536,46 +536,38 @@ export default function App() {
   }, [result, hours, battery]);
 
   return (
-    <div className="min-h-screen bg-[#070a13] text-slate-100 font-sans antialiased selection:bg-blue-500/30 selection:text-blue-200 relative overflow-x-hidden">
-      
-      {/* Ambient background glows for glassy depth */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
-        <div className="absolute top-1/3 -right-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-[120px]" />
-        <div className="absolute -bottom-20 left-1/3 w-96 h-96 bg-emerald-600/10 rounded-full blur-[140px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b0d_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0d_1px,transparent_1px)] bg-[size:32px_32px]" />
-      </div>
+    <div className="synexos-app min-h-screen antialiased relative overflow-x-hidden">
 
       {/* Top Demo Banner when viewing initial demo preview */}
       {isDemoResult && (
-        <div id="demo-banner" className="relative z-10 bg-amber-950/40 backdrop-blur-xl border-b border-amber-500/30 px-4 py-2.5 text-amber-200 text-xs flex flex-wrap items-center justify-between gap-3 shadow-[0_4px_20px_rgba(245,158,11,0.1)]">
+        <div id="demo-banner" className="synexos-announcement relative z-10 px-4 py-2.5 text-xs flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-lg font-black text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase tracking-wide">
-              Demo Data — Not Used by the Judge
+            <span className="px-2.5 py-0.5 rounded font-bold text-[10px] uppercase tracking-wide">
+              Preview scenario
             </span>
-            <span className="font-semibold text-amber-100">
-              Demo / Preview Data loaded for initial UI demonstration. You can replace this with your own scenario or click "Optimize Energy" to run the live API.
+            <span className="font-medium">
+              Sample values are shown. Edit the scenario or run the optimizer to generate a live schedule.
             </span>
           </div>
-          <span className="text-[11px] text-amber-400 font-medium">
-            Demo Data — You can replace this with your own scenario.
+          <span className="text-[11px] font-medium">
+            Preview only
           </span>
         </div>
       )}
 
       {/* Main Container */}
-      <div className="relative z-10 flex min-h-screen">
+      <div className="synexos-shell relative z-10 flex min-h-screen">
 
         {/* Sidebar Navigation */}
-        <aside className="w-64 bg-slate-950/60 backdrop-blur-2xl border-r border-slate-800/80 hidden lg:flex flex-col p-6 shadow-[4px_0_24px_rgba(0,0,0,0.4)]">
+        <aside className="synexos-sidebar w-64 hidden lg:flex flex-col p-6">
           {/* Brand */}
           <div className="flex items-center gap-3 mb-8 px-1">
-            <div className="w-10 h-10 bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(37,99,235,0.45)] border border-cyan-400/30">
-              <Zap className="w-5 h-5 drop-shadow" />
+            <div className="synexos-brand-mark w-10 h-10 rounded flex items-center justify-center text-white">
+              <Zap className="w-5 h-5" />
             </div>
             <div>
-              <h1 className="font-extrabold text-base leading-tight text-white tracking-tight">GridWise</h1>
-              <p className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">BUP CSE Fest 2026</p>
+              <h1 className="font-bold text-base leading-tight text-white">SynexOS</h1>
+              <p className="text-[10px] text-cyan-400 font-semibold uppercase tracking-wider">Energy systems</p>
             </div>
           </div>
 
@@ -669,22 +661,22 @@ export default function App() {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 p-4 md:p-8 lg:p-10 max-w-7xl mx-auto overflow-x-hidden">
+        <main className="synexos-main flex-1 p-4 md:p-8 lg:p-10 max-w-7xl mx-auto overflow-x-hidden">
           
           {/* Header Section */}
-          <header className="mb-8 flex flex-col xl:flex-row xl:items-end justify-between gap-6 pb-6 border-b border-slate-800/80">
+          <header className="synexos-page-header mb-8 flex flex-col xl:flex-row xl:items-end justify-between gap-6 pb-6 border-b border-slate-800/80">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20 shadow-[0_0_12px_rgba(59,130,246,0.15)]">
-                  BUP CSE Fest 2026 · Online Preliminary
+                <span className="synexos-eyebrow px-2.5 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider">
+                  SynexOS <span aria-hidden="true">/</span> Energy intelligence
                 </span>
-                <span className="text-xs text-slate-400 font-medium">Smart Campus Energy Scheduling</span>
+                <span className="text-xs text-slate-400 font-medium">Operations workspace</span>
               </div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-                GridWise LLM Energy Optimizer
+              <h1 className="text-2xl md:text-3xl font-bold text-white">
+                Energy operations
               </h1>
               <p className="text-xs md:text-sm text-slate-400 font-medium mt-1">
-                Dynamic 24-Hour LP Cost Minimization with LLM Directive Extraction
+                24-hour dispatch planning, operator directives, and constraint validation
               </p>
             </div>
 
@@ -749,7 +741,7 @@ export default function App() {
                 id="btn-optimize-energy"
                 onClick={handleOptimize}
                 disabled={loading}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs md:text-sm disabled:opacity-50 disabled:cursor-wait transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] border border-blue-400/30 active:scale-[0.98]"
+                className="synexos-primary-action flex items-center gap-2 px-5 py-2.5 text-white rounded font-semibold text-xs md:text-sm disabled:opacity-50 disabled:cursor-wait transition-all"
               >
                 {loading ? (
                   <>
@@ -920,6 +912,34 @@ export default function App() {
                     <p className="text-[10px] text-slate-400 mt-1">Clean solar power absorbed</p>
                   </div>
                 </div>
+              )}
+
+              {result?.baseline_metrics && (
+                <section className="bg-slate-900/60 backdrop-blur-xl p-5 rounded-2xl border border-slate-800/80">
+                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-4">
+                    <div>
+                      <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider">Directive Impact</h3>
+                      <p className="text-[11px] text-slate-400 mt-1">
+                        Compared with the same forecasts and battery, optimized without operator notes.
+                      </p>
+                    </div>
+                    <span className="text-[10px] text-slate-500">LP baseline · no-note scenario</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {([
+                      { label: "Cost change", value: result.total_cost_bdt - result.baseline_metrics.total_cost_bdt, unit: "BDT", digits: 2 },
+                      { label: "Grid energy change", value: result.total_grid_kwh - result.baseline_metrics.total_grid_kwh, unit: "kWh", digits: 1 },
+                      { label: "Peak grid change", value: result.peak_grid_kwh - result.baseline_metrics.peak_grid_kwh, unit: "kWh", digits: 1 },
+                    ]).map((metric) => (
+                      <div key={metric.label} className="border-l-2 border-cyan-500/50 pl-3">
+                        <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">{metric.label}</p>
+                        <p className={`text-lg font-bold mt-1 ${Math.abs(metric.value) < 0.005 ? "text-slate-200" : metric.value < 0 ? "text-emerald-400" : "text-amber-300"}`}>
+                          {metric.value > 0 ? "+" : ""}{metric.value.toLocaleString(undefined, { minimumFractionDigits: metric.digits, maximumFractionDigits: metric.digits })} {metric.unit}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
               )}
 
               {/* SECTION 11: CHARTS (Requirement #11) */}

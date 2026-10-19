@@ -6,13 +6,13 @@
 import express, { Request, Response } from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
-import { GridWiseService } from "./src/services/gridwise-service";
+import { SynexOSService } from "./src/services/synexos-service";
 import { OptimizeRequest } from "./src/types";
 
 async function startServer() {
   const app = express();
   const port = 3000;
-  const service = new GridWiseService();
+  const service = new SynexOSService();
 
   app.use(express.json({ limit: "1mb" }));
 
@@ -69,7 +69,7 @@ async function startServer() {
   }
 
   app.listen(port, "0.0.0.0", () => {
-    console.log(`GridWise service listening at http://0.0.0.0:${port}`);
+    console.log(`SynexOS service listening at http://0.0.0.0:${port}`);
   });
 }
 

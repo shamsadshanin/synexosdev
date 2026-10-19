@@ -9,7 +9,7 @@ import { GuardrailValidator } from "../guardrails/validator";
 import { EnergyOptimizer } from "../optimizer/optimizer";
 import { PlanValidator } from "../validation/plan-validator";
 
-export class GridWiseService {
+export class SynexOSService {
   private interpreter: LLMInterpreter;
   private optimizer: EnergyOptimizer;
 
@@ -35,11 +35,17 @@ export class GridWiseService {
     PlanValidator.validate(hourlyPlan, request, validatedInterpretations);
     const totals = PlanValidator.calculateTotals(hourlyPlan, request);
 
+    // Compare the directive-constrained plan with the same scenario without operator notes.
+    const baselinePlan = this.optimizer.optimize(request, []);
+    PlanValidator.validate(baselinePlan, request, []);
+    const baseline_metrics = PlanValidator.calculateTotals(baselinePlan, request);
+
     return {
       scenario_id: request.scenario_id,
       directive_interpretation: validatedInterpretations,
       hourly_plan: hourlyPlan,
       ...totals,
+      baseline_metrics,
       plan_summary: llmResult.plan_summary,
     };
   }

@@ -85,6 +85,11 @@ export interface OptimizeResponse {
   total_grid_kwh: number;
   total_cost_bdt: number;
   peak_grid_kwh: number;
+  baseline_metrics?: {
+    total_grid_kwh: number;
+    total_cost_bdt: number;
+    peak_grid_kwh: number;
+  };
   plan_summary: string;
 }
 

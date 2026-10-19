@@ -1,6 +1,6 @@
 {
-  "name": "GridWise LLM Energy Optimizer",
-  "description": "An AI-powered energy management system that interprets operator directives and optimizes 24-hour grid electricity usage.",
+  "name": "SynexOS Energy Operations",
+  "description": "Energy operations software for interpreting operator directives and optimizing 24-hour grid dispatch.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

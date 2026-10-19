@@ -1,26 +1,268 @@
 @import "tailwindcss";
 
-@layer base {
-  body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
-  code, pre, kbd {
-    font-family: 'JetBrains Mono', monospace;
+:root {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: #294540;
+  background: #f5f7f4;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: "IBM Plex Sans", sans-serif;
+  background: #f5f7f4;
+}
+
+code, pre, kbd {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+.synexos-app {
+  --ink: #294540;
+  --muted: #657a74;
+  --line: #d9e4dc;
+  --canvas: #f5f7f4;
+  --surface: #ffffff;
+  --accent: #14786e;
+  color: var(--ink);
+  background-color: var(--canvas);
+  background-image: linear-gradient(rgba(63, 106, 89, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(63, 106, 89, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.synexos-announcement {
+  color: #684f18;
+  background: #fff8e5;
+  border-bottom: 1px solid #ead9a8;
+}
+
+.synexos-announcement > div > span:first-child {
+  color: #775b17;
+  background: #f7edcf;
+  border: 1px solid #ead9a8;
+}
+
+.synexos-shell {
+  gap: 0;
+}
+
+.synexos-sidebar {
+  width: 248px;
+  min-height: 100vh;
+  padding: 24px 18px;
+  color: #31574d;
+  background: #e7eee8;
+  border-right: 1px solid #d3dfd6;
+}
+
+.synexos-sidebar .border-slate-800\/80 {
+  border-color: #cbd9ce;
+}
+
+.synexos-brand-mark {
+  background: #168477;
+  border: 1px solid #4bb5a4;
+}
+
+.synexos-sidebar nav button {
+  min-height: 40px;
+  border-radius: 4px;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.synexos-sidebar nav button:hover {
+  color: #24594e !important;
+  background: #d7e5da;
+}
+
+.synexos-sidebar nav button[class*="bg-blue-500/15"] {
+  color: #205a4e !important;
+  background: #d0e4d7;
+  border-color: #a9cbb7;
+  box-shadow: none;
+}
+
+.synexos-sidebar nav button[class*="text-slate-400"] {
+  color: #60786e;
+}
+
+.synexos-sidebar [class*="bg-slate-900/50"] {
+  background: #f5f8f4;
+  border-color: #d1ded4;
+  border-radius: 5px;
+  box-shadow: none;
+}
+
+.synexos-sidebar button[class*="bg-slate-800/60"] {
+  color: #31584e;
+  background: #edf3ed;
+  border-color: #cedbd1;
+  border-radius: 4px;
+}
+
+.synexos-sidebar [class*="text-slate-400"] {
+  color: #60786e;
+}
+
+.synexos-main {
+  width: min(100%, 1520px);
+  max-width: 1520px;
+  padding: 34px clamp(20px, 3.2vw, 52px) 56px;
+  color: var(--ink);
+}
+
+.synexos-page-header {
+  border-color: var(--line) !important;
+}
+
+.synexos-eyebrow {
+  color: #286c5c;
+  background: #e7f0e7;
+  border: 1px solid #cfdfd0;
+}
+
+.synexos-main section,
+.synexos-main [class*="bg-slate-900/60"],
+.synexos-main [class*="bg-slate-900/50"],
+.synexos-main [class*="bg-slate-950/60"],
+.synexos-main [class*="bg-blue-950/30"] {
+  color: var(--ink);
+  background-color: var(--surface) !important;
+  border-color: var(--line) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 1px 2px rgba(22, 48, 47, 0.045) !important;
+  backdrop-filter: none !important;
+}
+
+.synexos-main [class*="text-white"],
+.synexos-main [class*="text-slate-100"],
+.synexos-main [class*="text-slate-200"],
+.synexos-main [class*="text-slate-300"] {
+  color: #294540 !important;
+}
+
+.synexos-main [class*="text-slate-400"],
+.synexos-main [class*="text-slate-500"] {
+  color: #657a74 !important;
+}
+
+.synexos-main [class*="border-slate-800"],
+.synexos-main [class*="border-slate-700"],
+.synexos-main [class*="border-blue-500/30"],
+.synexos-main [class*="border-blue-500/20"] {
+  border-color: var(--line) !important;
+}
+
+.synexos-main [class*="bg-slate-950/80"] {
+  color: #286c5c;
+  background-color: #f2f6f1;
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.synexos-main [class*="bg-slate-800"],
+.synexos-main [class*="bg-slate-900"],
+.synexos-main [class*="bg-slate-950"] {
+  background-color: #f0f4ef !important;
+}
+
+.synexos-main button {
+  border-radius: 4px;
+}
+
+.synexos-main button[class*="bg-blue-600"] {
+  color: #ffffff !important;
+  background: #176f65;
+  border-color: #176f65;
+  box-shadow: none;
+}
+
+.synexos-main #btn-optimize-energy {
+  color: #ffffff !important;
+  background: #176f65;
+  border: 1px solid #176f65;
+  box-shadow: none;
+}
+
+.synexos-main #btn-optimize-energy:hover {
+  background: #105c54;
+}
+
+.synexos-main input,
+.synexos-main select,
+.synexos-main textarea {
+  color: #294540;
+  background-color: #ffffff;
+  border-color: #cad6d2;
+  border-radius: 4px;
+}
+
+.synexos-main .recharts-cartesian-grid line {
+  stroke: #e2e9e6;
+}
+
+.synexos-main .recharts-text {
+  fill: #657a74;
+}
+
+.synexos-app [class*="text-rose-"] {
+  color: #8a6736 !important;
+}
+
+.synexos-app [class*="bg-rose-"] {
+  color: #715a2d !important;
+  background-color: #fbf5e7 !important;
+  border-color: #e9d9b5 !important;
+}
+
+.synexos-app [class*="border-rose-"] {
+  border-color: #e9d9b5 !important;
+}
+
+.synexos-main [class*="bg-amber-950"] {
+  color: #715a2d !important;
+  background-color: #fbf5e7 !important;
+  border-color: #e9d9b5 !important;
+}
+
+.synexos-main [class*="bg-rose-500/15"],
+.synexos-main [class*="bg-amber-500/15"] {
+  color: #83652c !important;
+  background-color: #f5ecd5 !important;
+  border-color: #e7d8b2 !important;
+}
+
+.synexos-main [class*="text-emerald-"],
+.synexos-sidebar [class*="text-emerald-"] {
+  color: #28745e !important;
+}
+
+.synexos-main [class*="text-cyan-"] {
+  color: #2c7272 !important;
+}
+
+.synexos-app [class*="text-amber-"] {
+  color: #846532 !important;
+}
+
+@media (max-width: 1023px) {
+  .synexos-main {
+    padding: 22px 18px 40px;
   }
 }
 
-/* Custom glassy scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.4);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.2);
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.4);
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

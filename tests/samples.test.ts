@@ -6,7 +6,7 @@
 import { OptimizeRequest } from "../src/types";
 
 async function runTests() {
-  console.log("🚀 Starting GridWise Optimization Tests...");
+  console.log("🚀 Starting SynexOS Optimization Tests...");
 
   const testScenario: OptimizeRequest = {
     scenario_id: "test_comprehensive",

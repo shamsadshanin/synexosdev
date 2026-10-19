@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "title": "GridWise — Public LLM-Assisted Sample Case Pack",
-    "event": "BUP CSE Fest 2026 · Hackathon · Online Preliminary",
+    "title": "SynexOS — Energy Dispatch Sample Scenarios",
+    "event": "SynexOS Energy Operations",
     "version": "2.0",
     "endpoint": "POST /optimize-energy",
     "case_count": 10

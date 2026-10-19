@@ -1,6 +1,6 @@
-# GridWise LLM Energy Optimizer
+# SynexOS Energy Operations
 
-GridWise is a production-quality energy management system designed for the BUP CSE Fest 2026 Hackathon. It utilizes Large Language Models (LLMs) to interpret natural-language operator directives and applies deterministic linear programming to optimize 24-hour grid electricity usage.
+SynexOS is an energy operations platform that interprets natural-language operator directives and applies deterministic linear programming to optimize 24-hour grid electricity usage.
 
 ## 🚀 Overview
 
@@ -11,6 +11,7 @@ The system addresses the challenge of balancing varying energy demand, solar ava
 - **LLM-Based Interpretation**: Uses Google Gemini 1.5 Flash to convert complex natural language notes into structured energy directives.
 - **Deterministic Guardrails**: Validates all LLM outputs to ensure they adhere to physical and competition constraints.
 - **Optimal Scheduling**: Employs a Linear Programming (LP) solver to minimize total electricity cost across a 24-hour window.
+- **Directive Impact Analysis**: Compares the directive-constrained schedule against a no-note LP baseline using the same forecasts and battery configuration.
 - **Rigid Validation**: Independently verifies the final energy plan against all battery rules, energy balances, and directives before responding.
 
 ## 🛠 Architecture
@@ -18,7 +19,7 @@ The system addresses the challenge of balancing varying energy demand, solar ava
 The application follows a clean, modular architecture:
 
 1.  **API Layer (`server.ts`)**: Express-based HTTP endpoints (`/health`, `/optimize-energy`).
-2.  **Service Layer (`src/services/gridwise-service.ts`)**: Orchestrates the flow from input to optimized output.
+2.  **Service Layer (`src/services/synexos-service.ts`)**: Orchestrates the flow from input to optimized output.
 3.  **LLM Interpreter (`src/llm/interpreter.ts`)**: Communicates with the Gemini API using advanced system prompting and structured output.
 4.  **Guardrails (`src/guardrails/validator.ts`)**: Ensures LLM interpretations are safe, deterministic, and valid.
 5.  **Optimizer (`src/optimizer/optimizer.ts`)**: Formulates and solves the LP problem for energy scheduling.
@@ -43,6 +44,7 @@ Returns the operational status of the service.
 Accepts a scenario and returns an optimized 24-hour energy plan.
 - **Request Body**: See `src/types.ts` for `OptimizeRequest`.
 - **Response Body**: See `src/types.ts` for `OptimizeResponse`.
+- Live responses include `baseline_metrics`; dashboard deltas show how operator directives change grid cost, imported energy, and peak grid draw relative to the same-input no-note optimum. Positive values indicate increases.
 
 ## ⚙️ Environment Variables
 
@@ -62,8 +64,8 @@ Accepts a scenario and returns an optimized 24-hour energy plan.
 - Check health: `curl http://localhost:3000/health`
 
 ### Docker
-- Build: `docker build -t gridwise-llm .`
-- Run: `docker run -p 3000:3000 -e GEMINI_API_KEY=your_key gridwise-llm`
+- Build: `docker build -t synexos-energy-operations .`
+- Run: `docker run -p 3000:3000 -e GEMINI_API_KEY=your_key synexos-energy-operations`
 
 ## 📊 Optimization Method
 The system uses **Linear Programming (LP)** via the `javascript-lp-solver` library. This ensures a deterministic, global optimum for the cost-minimization objective while strictly satisfying all linear constraints and directives.
