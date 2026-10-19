@@ -1008,7 +1008,7 @@ export default function App() {
                   </div>
 
                   {/* Chart View Selector */}
-                  <div className="flex bg-slate-950/60 border border-slate-800/80 p-1 rounded-xl gap-1 self-start sm:self-auto">
+                  <div className="synexos-chart-controls flex bg-slate-950/60 border border-slate-800/80 p-1 rounded-xl gap-1 self-start sm:self-auto">
                     <button
                       onClick={() => setChartView("combined")}
                       className={`px-3 py-1 text-[11px] font-bold rounded-lg transition-all ${
@@ -1057,59 +1057,59 @@ export default function App() {
                     <ResponsiveContainer width="100%" height="100%">
                       {chartView === "combined" ? (
                         <ComposedChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" />
-                          <XAxis dataKey="hourLabel" axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 10, fontWeight: 600 }} dy={8} />
-                          <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 10, fontWeight: 600 }} />
+                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#414141" />
+                          <XAxis dataKey="hourLabel" axisLine={false} tickLine={false} tick={{ fill: "#ffffff", fontSize: 10, fontWeight: 600 }} dy={8} />
+                          <YAxis axisLine={false} tickLine={false} tick={{ fill: "#ffffff", fontSize: 10, fontWeight: 600 }} />
                           <Tooltip
-                            contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.95)', borderColor: '#334155', borderRadius: '16px', backdropFilter: 'blur(16px)', color: '#f8fafc', boxShadow: '0 20px 40px rgba(0,0,0,0.6)', padding: '12px' }}
+                            contentStyle={{ backgroundColor: '#141414', borderColor: '#a71c2c', borderRadius: '6px', color: '#ffffff', boxShadow: '0 12px 30px rgba(0,0,0,0.55)', padding: '12px' }}
                             itemStyle={{ fontSize: "11px", fontWeight: 600 }}
                             formatter={(value: any, name?: any) => [`${Number(value).toFixed(1)} kWh`, String(name || "").toUpperCase()]}
                             labelFormatter={(lbl) => `Hour ${lbl}`}
                           />
-                          <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "12px", color: "#94a3b8" }} />
-                          <Area type="monotone" dataKey="solarAvailable" name="Solar Available" fill="#fbbf24" stroke="#f59e0b" fillOpacity={0.15} strokeWidth={1.5} />
-                          <Line type="monotone" dataKey="demand" name="Demand" stroke="#38bdf8" strokeWidth={2.5} dot={false} />
-                          <Line type="stepAfter" dataKey="grid" name="Grid Imported" stroke="#f1f5f9" strokeWidth={2} dot={false} />
-                          <Line type="monotone" dataKey="batteryEnergy" name="Battery Energy After" stroke="#34d399" strokeWidth={2} strokeDasharray="4 4" dot={false} />
+                          <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "12px", color: "#ffffff" }} />
+                          <Area type="monotone" dataKey="solarAvailable" name="Solar Available" fill="#7f1421" stroke="#e11d32" fillOpacity={0.7} strokeWidth={1.5} />
+                          <Line type="monotone" dataKey="demand" name="Demand" stroke="#ff3448" strokeWidth={2.5} dot={false} />
+                          <Line type="stepAfter" dataKey="grid" name="Grid Imported" stroke="#ffffff" strokeWidth={2} dot={false} />
+                          <Line type="monotone" dataKey="batteryEnergy" name="Battery Energy After" stroke="#d4d4d4" strokeWidth={2} strokeDasharray="4 4" dot={false} />
                         </ComposedChart>
                       ) : chartView === "power" ? (
                         <ComposedChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" />
-                          <XAxis dataKey="hourLabel" axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 10, fontWeight: 600 }} dy={8} />
-                          <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 10, fontWeight: 600 }} />
+                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#414141" />
+                          <XAxis dataKey="hourLabel" axisLine={false} tickLine={false} tick={{ fill: "#ffffff", fontSize: 10, fontWeight: 600 }} dy={8} />
+                          <YAxis axisLine={false} tickLine={false} tick={{ fill: "#ffffff", fontSize: 10, fontWeight: 600 }} />
                           <Tooltip
-                            contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.95)', borderColor: '#334155', borderRadius: '16px', backdropFilter: 'blur(16px)', color: '#f8fafc', padding: '12px' }}
+                            contentStyle={{ backgroundColor: '#141414', borderColor: '#a71c2c', borderRadius: '6px', color: '#ffffff', padding: '12px' }}
                             formatter={(value: any, name?: any) => [`${Number(value).toFixed(1)} kWh`, String(name || "").toUpperCase()]}
                           />
                           <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "12px" }} />
-                          <Area type="monotone" dataKey="solarUsed" name="Solar Used" fill="#fbbf24" stroke="#f59e0b" fillOpacity={0.3} strokeWidth={2} />
-                          <Line type="monotone" dataKey="demand" name="Campus Demand" stroke="#38bdf8" strokeWidth={2.5} dot={{ r: 2 }} />
-                          <Line type="stepAfter" dataKey="grid" name="Grid Import" stroke="#f1f5f9" strokeWidth={2} dot={{ r: 2 }} />
+                          <Area type="monotone" dataKey="solarUsed" name="Solar Used" fill="#7f1421" stroke="#e11d32" fillOpacity={0.7} strokeWidth={2} />
+                          <Line type="monotone" dataKey="demand" name="Campus Demand" stroke="#ff3448" strokeWidth={2.5} dot={{ r: 2 }} />
+                          <Line type="stepAfter" dataKey="grid" name="Grid Import" stroke="#ffffff" strokeWidth={2} dot={{ r: 2 }} />
                         </ComposedChart>
                       ) : chartView === "battery" ? (
                         <ComposedChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" />
-                          <XAxis dataKey="hourLabel" axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 10, fontWeight: 600 }} dy={8} />
-                          <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 10, fontWeight: 600 }} domain={[0, Math.max(battery.capacity_kwh * 1.1, 100)]} />
+                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#414141" />
+                          <XAxis dataKey="hourLabel" axisLine={false} tickLine={false} tick={{ fill: "#ffffff", fontSize: 10, fontWeight: 600 }} dy={8} />
+                          <YAxis axisLine={false} tickLine={false} tick={{ fill: "#ffffff", fontSize: 10, fontWeight: 600 }} domain={[0, Math.max(battery.capacity_kwh * 1.1, 100)]} />
                           <Tooltip
-                            contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.95)', borderColor: '#334155', borderRadius: '16px', backdropFilter: 'blur(16px)', color: '#f8fafc', padding: '12px' }}
+                            contentStyle={{ backgroundColor: '#141414', borderColor: '#a71c2c', borderRadius: '6px', color: '#ffffff', padding: '12px' }}
                             formatter={(value: any, name?: any) => [`${Number(value).toFixed(1)} kWh`, String(name || "").toUpperCase()]}
                           />
                           <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "12px" }} />
-                          <Area type="monotone" dataKey="batteryEnergy" name="Battery Energy State" fill="#10b981" stroke="#34d399" fillOpacity={0.25} strokeWidth={2.5} dot={{ r: 3 }} />
-                          <Line type="monotone" dataKey="minReserve" name="Min Reserve Bound" stroke="#f43f5e" strokeDasharray="3 3" strokeWidth={1.5} dot={false} />
+                          <Area type="monotone" dataKey="batteryEnergy" name="Battery Energy State" fill="#7f1421" stroke="#e11d32" fillOpacity={0.75} strokeWidth={2.5} dot={{ r: 3 }} />
+                          <Line type="monotone" dataKey="minReserve" name="Min Reserve Bound" stroke="#ffffff" strokeDasharray="3 3" strokeWidth={1.5} dot={false} />
                         </ComposedChart>
                       ) : (
                         <ComposedChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" />
-                          <XAxis dataKey="hourLabel" axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 10, fontWeight: 600 }} dy={8} />
-                          <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 10, fontWeight: 600 }} />
+                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#414141" />
+                          <XAxis dataKey="hourLabel" axisLine={false} tickLine={false} tick={{ fill: "#ffffff", fontSize: 10, fontWeight: 600 }} dy={8} />
+                          <YAxis axisLine={false} tickLine={false} tick={{ fill: "#ffffff", fontSize: 10, fontWeight: 600 }} />
                           <Tooltip
-                            contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.95)', borderColor: '#334155', borderRadius: '16px', backdropFilter: 'blur(16px)', color: '#f8fafc', padding: '12px' }}
+                            contentStyle={{ backgroundColor: '#141414', borderColor: '#a71c2c', borderRadius: '6px', color: '#ffffff', padding: '12px' }}
                             formatter={(value: any) => [`${Number(value).toFixed(0)} BDT/kWh`, "Tariff Rate"]}
                           />
                           <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "12px" }} />
-                          <Bar dataKey="tariff" name="Grid Tariff (BDT/kWh)" fill="#818cf8" radius={[6, 6, 0, 0]} />
+                          <Bar dataKey="tariff" name="Grid Tariff (BDT/kWh)" fill="#e11d32" radius={[4, 4, 0, 0]} />
                         </ComposedChart>
                       )}
                     </ResponsiveContainer>

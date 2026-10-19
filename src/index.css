@@ -505,3 +505,262 @@ button, input, select, textarea {
     transition-duration: 0.01ms !important;
   }
 }
+
+:root,
+body {
+  color: #ffffff;
+  background: #080808;
+}
+
+.synexos-app {
+  --ink: #ffffff;
+  --muted: #dedede;
+  --line: #383838;
+  --canvas: #0b0b0b;
+  --surface: #171717;
+  --accent: #e11d32;
+  color: #ffffff;
+  background-color: #0b0b0b;
+  background-image: linear-gradient(rgba(225, 29, 50, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(225, 29, 50, 0.035) 1px, transparent 1px);
+}
+
+.synexos-app,
+.synexos-app p,
+.synexos-app span,
+.synexos-app h1,
+.synexos-app h2,
+.synexos-app h3,
+.synexos-app label,
+.synexos-app th,
+.synexos-app td,
+.synexos-app li,
+.synexos-app button,
+.synexos-app a,
+.synexos-app [class*="text-"] {
+  color: #ffffff !important;
+}
+
+.synexos-systembar {
+  color: #ffffff;
+  background: #151515;
+  border-bottom-color: #383838;
+  box-shadow: none;
+}
+
+.synexos-system-brand,
+.synexos-system-context,
+.synexos-system-health,
+.synexos-statusbar,
+.synexos-status-details,
+.synexos-version,
+.synexos-nav-heading,
+.synexos-system-product,
+.synexos-breadcrumb,
+.synexos-breadcrumb span {
+  color: #ffffff;
+}
+
+.synexos-system-icon,
+.synexos-brand-mark {
+  color: #ffffff;
+  background: #c5162a;
+  border-color: #ef3349;
+}
+
+.synexos-system-divider,
+.synexos-status-details span + span {
+  background: #424242;
+  border-left-color: #424242;
+}
+
+.synexos-system-context span:first-child {
+  color: #ff5365;
+}
+
+.synexos-system-health {
+  color: #ffffff;
+  background: #1e1e1e;
+  border-color: #464646;
+}
+
+.synexos-system-health:hover {
+  background: #2b1518;
+}
+
+.synexos-status-dot,
+.synexos-status-dot.online,
+.synexos-status-dot.checking,
+.synexos-status-dot.offline {
+  background: #ed263b;
+}
+
+.synexos-sidebar {
+  color: #ffffff;
+  background: #101010;
+  border-right-color: #343434;
+}
+
+.synexos-sidebar .border-slate-800\/80,
+.synexos-main [class*="border-"] {
+  border-color: #393939 !important;
+}
+
+.synexos-sidebar nav button[class*="bg-blue-500/15"],
+.synexos-sidebar nav button:hover {
+  color: #ffffff !important;
+  background: #74101d;
+  border-color: #b91c2c;
+  box-shadow: inset 3px 0 #f12b40;
+}
+
+.synexos-sidebar nav button[class*="text-slate-400"] {
+  color: #ffffff !important;
+}
+
+.synexos-sidebar [class*="bg-slate-900/50"] {
+  color: #ffffff;
+  background: #1a1a1a;
+  border-color: #393939;
+}
+
+.synexos-sidebar button[class*="bg-slate-800/60"] {
+  color: #ffffff;
+  background: #242424;
+  border-color: #494949;
+}
+
+.synexos-main {
+  color: #ffffff;
+}
+
+.synexos-main section,
+.synexos-main [class*="bg-slate-900/60"],
+.synexos-main [class*="bg-slate-900/50"],
+.synexos-main [class*="bg-slate-950/60"],
+.synexos-main [class*="bg-blue-950/30"] {
+  color: #ffffff !important;
+  background-color: #171717 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.synexos-main [class*="bg-slate-"],
+.synexos-main [class*="bg-blue-"],
+.synexos-main [class*="bg-cyan-"],
+.synexos-main [class*="bg-emerald-"],
+.synexos-main [class*="bg-amber-"],
+.synexos-main [class*="bg-indigo-"],
+.synexos-main [class*="bg-rose-"] {
+  color: #ffffff !important;
+  background-color: #202020 !important;
+  border-color: #414141 !important;
+}
+
+.synexos-main [class*="bg-blue-600"],
+.synexos-main #btn-optimize-energy,
+.synexos-main .synexos-key-save {
+  color: #ffffff !important;
+  background: #c5162a !important;
+  border-color: #ef3349 !important;
+}
+
+.synexos-main [class*="bg-blue-600"]:hover,
+.synexos-main #btn-optimize-energy:hover,
+.synexos-main .synexos-key-save:hover:not(:disabled) {
+  background: #e11d32 !important;
+}
+
+.synexos-main [class*="bg-rose-"],
+.synexos-main [class*="bg-amber-950"] {
+  background-color: #3b1117 !important;
+  border-color: #8e1d2b !important;
+}
+
+.synexos-main [class*="bg-slate-950/80"],
+.synexos-main [class*="bg-slate-800"],
+.synexos-main [class*="bg-slate-900"] {
+  color: #ffffff !important;
+  background-color: #202020 !important;
+}
+
+.synexos-main input,
+.synexos-main select,
+.synexos-main textarea,
+.synexos-main option {
+  color: #ffffff !important;
+  background-color: #111111 !important;
+  border-color: #454545 !important;
+}
+
+.synexos-main input::placeholder,
+.synexos-main textarea::placeholder {
+  color: #c3c3c3 !important;
+}
+
+.synexos-main input:focus,
+.synexos-main select:focus,
+.synexos-main textarea:focus {
+  border-color: #ed263b !important;
+  outline-color: #ed263b;
+}
+
+.synexos-key-icon {
+  color: #ffffff;
+  background: #3b1117;
+  border-color: #8e1d2b;
+}
+
+.synexos-statusbar {
+  color: #ffffff;
+  background: #141414;
+  border-top-color: #383838;
+}
+
+.synexos-announcement {
+  color: #ffffff;
+  background: #351015;
+  border-bottom-color: #81202b;
+}
+
+.synexos-announcement > div > span:first-child {
+  color: #ffffff;
+  background: #721321;
+  border-color: #b92133;
+}
+
+.synexos-main .recharts-cartesian-grid line {
+  stroke: #414141;
+}
+
+.synexos-main .recharts-text,
+.synexos-main .recharts-legend-item-text {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.synexos-main .recharts-tooltip-wrapper > div {
+  color: #ffffff !important;
+  background: #141414 !important;
+  border: 1px solid #a71c2c !important;
+  border-radius: 6px !important;
+}
+
+.synexos-main .recharts-tooltip-item,
+.synexos-main .recharts-tooltip-label {
+  color: #ffffff !important;
+}
+
+.synexos-view-tabs,
+.synexos-chart-controls {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-color: #a71c2c transparent;
+  scrollbar-width: thin;
+}
+
+.synexos-view-tabs > button,
+.synexos-chart-controls > button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
