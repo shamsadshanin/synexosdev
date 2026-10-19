@@ -581,7 +581,13 @@ export default function App() {
         </div>
       )}
 
-      <div className="synexos-systembar" role="banner">
+      <motion.div
+        className="synexos-systembar"
+        role="banner"
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.32, ease: "easeOut" }}
+      >
         <div className="synexos-system-brand">
           <span className="synexos-system-icon"><Zap className="w-4 h-4" /></span>
           <span className="synexos-system-name">SynexOS</span>
@@ -603,13 +609,18 @@ export default function App() {
           <span>{healthStatus === "online" ? "Engine online" : healthStatus === "checking" ? "Connecting" : "Engine offline"}</span>
           <RefreshCw className={`w-3.5 h-3.5 ${healthChecking ? "animate-spin" : ""}`} />
         </button>
-      </div>
+      </motion.div>
 
       {/* Main Container */}
       <div className="synexos-shell relative z-10 flex min-h-screen">
 
         {/* Sidebar Navigation */}
-        <aside className="synexos-sidebar w-64 hidden lg:flex flex-col p-6">
+        <motion.aside
+          className="synexos-sidebar w-64 hidden lg:flex flex-col p-6"
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.38, delay: 0.04, ease: "easeOut" }}
+        >
           {/* Brand */}
           <div className="flex items-center gap-3 mb-8 px-1">
             <div className="synexos-brand-mark w-10 h-10 rounded flex items-center justify-center text-white">
@@ -624,9 +635,12 @@ export default function App() {
           {/* Nav Items */}
           <p className="synexos-nav-heading">Workspace</p>
           <nav className="space-y-2 flex-1">
-            <button
+            <motion.button
               id="nav-dashboard"
               onClick={() => setActiveTab("dashboard")}
+              whileHover={{ x: 3 }}
+              whileTap={{ scale: 0.985 }}
+              transition={{ type: "spring", stiffness: 420, damping: 28 }}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                 activeTab === "dashboard"
                   ? "bg-blue-500/15 text-blue-400 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.15)]"
@@ -635,10 +649,13 @@ export default function App() {
             >
               <LayoutDashboard className="w-4 h-4" />
               Overview & Visuals
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               id="nav-table"
               onClick={() => setActiveTab("table")}
+              whileHover={{ x: 3 }}
+              whileTap={{ scale: 0.985 }}
+              transition={{ type: "spring", stiffness: 420, damping: 28 }}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                 activeTab === "table"
                   ? "bg-blue-500/15 text-blue-400 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.15)]"
@@ -647,10 +664,13 @@ export default function App() {
             >
               <TableIcon className="w-4 h-4" />
               24-Hour Plan Table
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               id="nav-config"
               onClick={() => setActiveTab("config")}
+              whileHover={{ x: 3 }}
+              whileTap={{ scale: 0.985 }}
+              transition={{ type: "spring", stiffness: 420, damping: 28 }}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                 activeTab === "config"
                   ? "bg-blue-500/15 text-blue-400 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.15)]"
@@ -659,7 +679,7 @@ export default function App() {
             >
               <Sliders className="w-4 h-4" />
               Scenario Editor (24h)
-            </button>
+            </motion.button>
           </nav>
 
           {/* Sidebar Health Check Box */}
@@ -709,10 +729,15 @@ export default function App() {
               </button>
             </div>
           </div>
-        </aside>
+        </motion.aside>
 
         {/* Main Content Area */}
-        <main className="synexos-main flex-1 p-4 md:p-8 lg:p-10 max-w-7xl mx-auto overflow-x-hidden">
+        <motion.main
+          className="synexos-main flex-1 p-4 md:p-8 lg:p-10 max-w-7xl mx-auto overflow-x-hidden"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.08, ease: "easeOut" }}
+        >
           
           {/* Header Section */}
           <header className="synexos-page-header mb-8 flex flex-col xl:flex-row xl:items-end justify-between gap-6 pb-6 border-b border-slate-800/80">
@@ -858,8 +883,11 @@ export default function App() {
 
           {/* Navigation View Tabs */}
           <div className="synexos-view-tabs flex gap-2 mb-6 border-b border-slate-800/80 pb-3">
-            <button
+            <motion.button
               onClick={() => setActiveTab("dashboard")}
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 460, damping: 30 }}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeTab === "dashboard"
                   ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.4)] border border-blue-400/40"
@@ -867,9 +895,12 @@ export default function App() {
               }`}
             >
               Overview & Visuals
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => setActiveTab("table")}
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 460, damping: 30 }}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeTab === "table"
                   ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.4)] border border-blue-400/40"
@@ -877,9 +908,12 @@ export default function App() {
               }`}
             >
               24-Hour Energy Plan (Table)
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => setActiveTab("config")}
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 460, damping: 30 }}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeTab === "config"
                   ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.4)] border border-blue-400/40"
@@ -887,14 +921,22 @@ export default function App() {
               }`}
             >
               Scenario Editor (Grid, Solar, Tariffs & Battery)
-            </button>
+            </motion.button>
           </div>
 
+          <AnimatePresence mode="wait" initial={false}>
           {/* ==================================================== */}
           {/* TAB 1: DASHBOARD (OVERVIEW, RESULTS, CHARTS, VALIDATION) */}
           {/* ==================================================== */}
           {activeTab === "dashboard" && (
-            <div className="space-y-8">
+            <motion.div
+              key="dashboard"
+              className="space-y-8"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
 
               {/* Status Header for Result */}
               {result && (
@@ -1267,14 +1309,21 @@ export default function App() {
                   </section>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* ==================================================== */}
           {/* TAB 2: 24-HOUR PLAN TABLE (Requirement #9.B) */}
           {/* ==================================================== */}
           {activeTab === "table" && (
-            <section className="bg-slate-900/60 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-slate-800/80 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+            <motion.section
+              key="table"
+              className="bg-slate-900/60 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-slate-800/80 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
                   <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
@@ -1343,14 +1392,21 @@ export default function App() {
                   No plan generated yet. Click "Optimize Energy" to run the schedule.
                 </div>
               )}
-            </section>
+            </motion.section>
           )}
 
           {/* ==================================================== */}
           {/* TAB 3: SCENARIO EDITOR (Requirement #5) */}
           {/* ==================================================== */}
           {activeTab === "config" && (
-            <div className="space-y-8">
+            <motion.div
+              key="config"
+              className="space-y-8"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
               
               {/* Scenario ID & Operator Notes */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -1616,13 +1672,19 @@ export default function App() {
                   </table>
                 </div>
               </section>
-            </div>
+            </motion.div>
           )}
+          </AnimatePresence>
 
-        </main>
+        </motion.main>
       </div>
 
-      <footer className="synexos-statusbar">
+      <motion.footer
+        className="synexos-statusbar"
+        initial={{ opacity: 0, y: 5 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.16, ease: "easeOut" }}
+      >
         <div className="synexos-status-primary">
           <span className={`synexos-status-dot ${healthStatus}`} />
           <span>{healthStatus === "online" ? "Services ready" : healthStatus === "checking" ? "Checking services" : "Service unavailable"}</span>
@@ -1633,7 +1695,7 @@ export default function App() {
           <span className="synexos-status-scenario">{scenarioId}</span>
         </div>
         <span className="synexos-version">SYNEXOS ENERGY SYSTEMS</span>
-      </footer>
+      </motion.footer>
     </div>
   );
 }
