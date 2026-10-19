@@ -24,7 +24,8 @@ import {
   Check, 
   RotateCcw,
   Sliders,
-  DollarSign
+  DollarSign,
+  KeyRound
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
@@ -137,6 +138,10 @@ export default function App() {
   const [healthStatus, setHealthStatus] = useState<"checking" | "online" | "offline">("checking");
   const [healthError, setHealthError] = useState<string | null>(null);
   const [healthChecking, setHealthChecking] = useState<boolean>(false);
+  const [desktopApiKeyConfigured, setDesktopApiKeyConfigured] = useState<boolean | null>(null);
+  const [desktopApiKeyDraft, setDesktopApiKeyDraft] = useState("");
+  const [desktopApiKeySaving, setDesktopApiKeySaving] = useState(false);
+  const [desktopApiKeyMessage, setDesktopApiKeyMessage] = useState<string | null>(null);
 
   // Sample cases loaded dynamically from public/samples.json
   const [sampleCases, setSampleCases] = useState<SampleCase[]>([]);
@@ -164,6 +169,11 @@ export default function App() {
   useEffect(() => {
     handleCheckHealth();
     loadPublicSamples();
+    if (window.synexosDesktop) {
+      window.synexosDesktop.getApiKeyStatus()
+        .then(setDesktopApiKeyConfigured)
+        .catch(() => setDesktopApiKeyConfigured(false));
+    }
   }, []);
 
   // Check API Health: GET /health
@@ -324,6 +334,22 @@ export default function App() {
       setApiError(err.message || "An unknown error occurred during optimization.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSaveDesktopApiKey = async () => {
+    if (!window.synexosDesktop || !desktopApiKeyDraft.trim()) return;
+    setDesktopApiKeySaving(true);
+    setDesktopApiKeyMessage(null);
+    try {
+      const status = await window.synexosDesktop.saveApiKey(desktopApiKeyDraft.trim());
+      setDesktopApiKeyConfigured(status.configured);
+      setDesktopApiKeyDraft("");
+      setDesktopApiKeyMessage("Key saved securely. Restart SynexOS to use it.");
+    } catch (error) {
+      setDesktopApiKeyMessage(error instanceof Error ? error.message : "Could not save the API key.");
+    } finally {
+      setDesktopApiKeySaving(false);
     }
   };
 
@@ -555,6 +581,30 @@ export default function App() {
         </div>
       )}
 
+      <div className="synexos-systembar" role="banner">
+        <div className="synexos-system-brand">
+          <span className="synexos-system-icon"><Zap className="w-4 h-4" /></span>
+          <span className="synexos-system-name">SynexOS</span>
+          <span className="synexos-system-divider" />
+          <span className="synexos-system-product">Energy Operations</span>
+        </div>
+        <div className="synexos-system-context">
+          <span>WORKSPACE</span>
+          <span className="synexos-system-divider" />
+          <span>{scenarioId}</span>
+        </div>
+        <button
+          className="synexos-system-health"
+          onClick={handleCheckHealth}
+          disabled={healthChecking}
+          title="Refresh service status"
+        >
+          <span className={`synexos-status-dot ${healthStatus}`} />
+          <span>{healthStatus === "online" ? "Engine online" : healthStatus === "checking" ? "Connecting" : "Engine offline"}</span>
+          <RefreshCw className={`w-3.5 h-3.5 ${healthChecking ? "animate-spin" : ""}`} />
+        </button>
+      </div>
+
       {/* Main Container */}
       <div className="synexos-shell relative z-10 flex min-h-screen">
 
@@ -572,6 +622,7 @@ export default function App() {
           </div>
 
           {/* Nav Items */}
+          <p className="synexos-nav-heading">Workspace</p>
           <nav className="space-y-2 flex-1">
             <button
               id="nav-dashboard"
@@ -666,6 +717,7 @@ export default function App() {
           {/* Header Section */}
           <header className="synexos-page-header mb-8 flex flex-col xl:flex-row xl:items-end justify-between gap-6 pb-6 border-b border-slate-800/80">
             <div>
+              <p className="synexos-breadcrumb">SynexOS <span>/</span> Energy workspace <span>/</span> Dispatch</p>
               <div className="flex items-center gap-2 mb-2">
                 <span className="synexos-eyebrow px-2.5 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider">
                   SynexOS <span aria-hidden="true">/</span> Energy intelligence
@@ -805,7 +857,7 @@ export default function App() {
           )}
 
           {/* Navigation View Tabs */}
-          <div className="flex gap-2 mb-6 border-b border-slate-800/80 pb-3">
+          <div className="synexos-view-tabs flex gap-2 mb-6 border-b border-slate-800/80 pb-3">
             <button
               onClick={() => setActiveTab("dashboard")}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
@@ -1453,6 +1505,42 @@ export default function App() {
                 </div>
               </div>
 
+              {window.synexosDesktop && (
+                <section className="synexos-desktop-key-settings p-6 space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="synexos-key-icon"><KeyRound className="w-4 h-4" /></div>
+                    <div>
+                      <h3 className="text-sm font-semibold">Gemini API access</h3>
+                      <p className="mt-1 text-xs text-slate-500">
+                        {desktopApiKeyConfigured ? "A key is configured for this Windows account." : "Add a Gemini API key to interpret operator notes."}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input
+                      type="password"
+                      autoComplete="new-password"
+                      value={desktopApiKeyDraft}
+                      onChange={(event) => setDesktopApiKeyDraft(event.target.value)}
+                      placeholder="Paste Gemini API key"
+                      aria-label="Gemini API key"
+                      className="min-w-0 flex-1 px-3 py-2 border text-xs"
+                    />
+                    <button
+                      onClick={handleSaveDesktopApiKey}
+                      disabled={desktopApiKeySaving || !desktopApiKeyDraft.trim()}
+                      className="synexos-key-save px-4 py-2 text-xs font-semibold disabled:opacity-50"
+                    >
+                      {desktopApiKeySaving ? "Saving..." : "Save key"}
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-slate-500">
+                    Stored encrypted for your Windows account. The key is never shown again after saving.
+                  </p>
+                  {desktopApiKeyMessage && <p className="text-xs text-emerald-700">{desktopApiKeyMessage}</p>}
+                </section>
+              )}
+
               {/* 24-Hour Input Data Table (Editable) */}
               <section className="bg-slate-900/60 backdrop-blur-xl p-6 rounded-3xl border border-slate-800/80 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
                 <div className="flex items-center justify-between mb-4">
@@ -1533,6 +1621,19 @@ export default function App() {
 
         </main>
       </div>
+
+      <footer className="synexos-statusbar">
+        <div className="synexos-status-primary">
+          <span className={`synexos-status-dot ${healthStatus}`} />
+          <span>{healthStatus === "online" ? "Services ready" : healthStatus === "checking" ? "Checking services" : "Service unavailable"}</span>
+        </div>
+        <div className="synexos-status-details">
+          <span>{hours.length}-hour horizon</span>
+          <span>Battery {battery.initial_energy_kwh} / {battery.capacity_kwh} kWh</span>
+          <span className="synexos-status-scenario">{scenarioId}</span>
+        </div>
+        <span className="synexos-version">SYNEXOS ENERGY SYSTEMS</span>
+      </footer>
     </div>
   );
 }

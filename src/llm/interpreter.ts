@@ -8,15 +8,11 @@ import { OptimizeRequest, LLMResponse } from "../types";
 import { SYSTEM_PROMPT } from "./prompts";
 
 export class LLMInterpreter {
-  private ai: GoogleGenerativeAI;
+  private ai: GoogleGenerativeAI | null;
 
   constructor() {
-    //const apiKey = process.env.GEMINI_API_KEY;
-    const apiKey = "AIzaSyC5tMSK4dpV254L5xQ-U06kD3ANxruWWcU";
-    if (!apiKey) {
-      throw new Error("GEMINI_API_KEY is not set");
-    }
-    this.ai = new GoogleGenerativeAI(apiKey);
+    const apiKey = process.env.GEMINI_API_KEY;
+    this.ai = apiKey ? new GoogleGenerativeAI(apiKey) : null;
   }
 
   async interpret(request: OptimizeRequest): Promise<LLMResponse> {
@@ -25,6 +21,10 @@ export class LLMInterpreter {
         interpretations: [],
         plan_summary: "No operator directives provided; standard 24-hour tariff cost minimization applied."
       };
+    }
+
+    if (!this.ai) {
+      throw new Error("Gemini API key is not configured. Add it in SynexOS settings.");
     }
 
     const prompt = `

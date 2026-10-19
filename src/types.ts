@@ -111,3 +111,12 @@ export interface SampleCase {
   };
   rationale?: string;
 }
+
+declare global {
+  interface Window {
+    synexosDesktop?: {
+      getApiKeyStatus: () => Promise<boolean>;
+      saveApiKey: (apiKey: string) => Promise<{ configured: boolean; restartRequired: boolean }>;
+    };
+  }
+}

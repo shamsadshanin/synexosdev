@@ -59,6 +59,14 @@ Accepts a scenario and returns an optimized 24-hour energy plan.
 3.  Set your `GEMINI_API_KEY` in a `.env` file.
 4.  Run the development server: `npm run dev`
 
+### Windows Desktop Setup
+1. Install Node.js 20 or newer and run `npm install` in the repository.
+2. Build a Windows x64 installer with `npm run desktop:win`.
+3. Run `release/SynexOS-Setup-1.0.0.exe`, then launch SynexOS from the Start menu or desktop shortcut.
+4. Open **Scenario Editor** and save your Gemini API key. It is encrypted for your Windows account; restart SynexOS after saving.
+
+The desktop app includes its own local optimization service and does not require a separate Node.js installation after setup. It binds that service to the local PC only. Windows may show an unsigned-app warning because the installer is not code-signed.
+
 ### Testing
 - Run automated tests: `npm run test`
 - Check health: `curl http://localhost:3000/health`

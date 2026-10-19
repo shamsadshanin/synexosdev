@@ -4,6 +4,7 @@
  */
 
 import express, { Request, Response } from "express";
+import "dotenv/config";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import { SynexOSService } from "./src/services/synexos-service";
@@ -11,7 +12,8 @@ import { OptimizeRequest } from "./src/types";
 
 async function startServer() {
   const app = express();
-  const port = 3000;
+  const port = Number(process.env.PORT ?? 3000);
+  const host = process.env.HOST ?? "0.0.0.0";
   const service = new SynexOSService();
 
   app.use(express.json({ limit: "1mb" }));
@@ -61,15 +63,22 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
+    const distPath = process.env.SYNEXOS_DIST_PATH || path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
 
-  app.listen(port, "0.0.0.0", () => {
-    console.log(`SynexOS service listening at http://0.0.0.0:${port}`);
+  const server = app.listen(port, host, () => {
+    const address = server.address();
+    const actualPort = typeof address === "object" && address ? address.port : port;
+    const serviceUrl = `http://${host}:${actualPort}`;
+    if (process.env.SYNEXOS_DESKTOP === "1") {
+      console.log(`SYNEXOS_SERVER_READY=${serviceUrl}`);
+    } else {
+      console.log(`SynexOS service listening at ${serviceUrl}`);
+    }
   });
 }
 
